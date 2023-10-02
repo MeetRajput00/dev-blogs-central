@@ -8,7 +8,8 @@ const firebaseConfig = {
   messagingSenderId: process.env.firebase_messagingSenderId,
   appId: process.env.firebase_appId,
   measurementId: process.env.firebase_measurementId,
-  databaseURL: process.env.firebase_databaseURL
+  databaseURL: process.env.firebase_databaseURL,
+  demo:"test"
 };
 
 
