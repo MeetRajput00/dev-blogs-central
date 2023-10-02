@@ -2,12 +2,15 @@
 import { useDispatch } from "react-redux";
 import { setLogOutUser, setUserNotAuthenticated } from "../currentUser/currentUserSlice";
 import { changeValue } from "../currentPage/currentPageSlice";
+import { useEffect } from "react";
 
 export default function ResetGlobalStates() {
   const dispatch = useDispatch();
-  dispatch(setUserNotAuthenticated());
-  dispatch(setLogOutUser());
-  dispatch(changeValue("Dashboard"));
+  useEffect(()=>{
+    dispatch(changeValue("Dashboard"));
+    dispatch(setUserNotAuthenticated());
+    dispatch(setLogOutUser());
+  },[])
   return(
     <></>
   );
