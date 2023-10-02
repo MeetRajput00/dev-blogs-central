@@ -1,7 +1,8 @@
 export default function CreateNewBlog() {
   return (
     <div className="flex flex-col w-10/12 h-full">
-    <div>
+    <input type="text" id="post_name" className="m-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/5 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name of the post" required/>
+    <div className="m-4">
         <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
           <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
             <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
@@ -197,19 +198,21 @@ export default function CreateNewBlog() {
             </label>
             <textarea
               id="editor"
-              rows="8"
+              rows="40"
               className="block w-full px-0 text-sm text-gray-800 bg-white border-0 focus:outline-none resize-none"
               placeholder="Write an article..."
               required
             ></textarea>
           </div>
         </div>
+        <div className="w-full flex flex-row justify-end">
         <button
           type="submit"
-          className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-orange-600 rounded-lg   hover:bg-orange-700"
+          className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-700 "
         >
           Publish post
         </button>
+        </div>
     </div>
     </div>
   );

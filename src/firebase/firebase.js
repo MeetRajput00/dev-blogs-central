@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase,ref, set,get,child } from "firebase/database";
-
 const firebaseConfig = {
   apiKey: process.env.firebase_apiKey,
   authDomain: "devspace-11ca8.firebaseapp.com",
@@ -17,11 +16,14 @@ const app = initializeApp(firebaseConfig);
 
 const database = getDatabase(app);
 
-
-export default async function writeUserData(username, email, password) {
+export default async function writeUserData(firstName, lastName, mobile, username, email, password) {
     await set(ref(database, 'users/' + username), {
+      firstName: firstName,
+      lastName: lastName,
+      mobile: mobile,
       email: email,
-      password : password
+      password : password,
+      joiningDate: new Date().toLocaleString()
     });
   }
 export async function checkUserExists(username){
@@ -35,8 +37,15 @@ export async function authenticateUser(username, password){
   const snapshot=await get(child(ref(database),"users/"+username));
   if(snapshot.exists()){
     if(snapshot.val().password===password){
-      return true;
+      const data = {
+        firstName: snapshot.val().firstName,
+        lastName: snapshot.val().lastName,
+        mobile: snapshot.val().mobile,
+        email: snapshot.val().email,
+        joiningDate: snapshot.val().joiningDate
+      };    
+      return data;    
     }
   }
-  return false;
+  return null;
 }

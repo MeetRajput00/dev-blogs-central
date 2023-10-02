@@ -6,6 +6,9 @@ import writeUserData, { checkUserExists } from "../firebase/firebase";
 export default function Register() {
 
   const [credentials, setCredentials] = useState({
+    firstName:"",
+    lastName:"",
+    mobile:"",
     username: "",
     email: "",
     password: "",
@@ -16,7 +19,6 @@ export default function Register() {
   };
 
   const addUser = () => {
-
     try {
       checkUserExists(credentials.username).then((userExists)=>{
         if(userExists){
@@ -24,6 +26,9 @@ export default function Register() {
         }
         else{
           writeUserData(
+            credentials.firstName,
+            credentials.lastName,
+            credentials.mobile,
             credentials.username,
             credentials.email,
             credentials.password
@@ -41,7 +46,57 @@ export default function Register() {
       <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-white">
         <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-lg sm:rounded-lg">
           <div>
-            <div>
+          <div className="mt-4 flex flex-row">
+            <div className="w-1/2">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 undefined"
+              >
+                First Name
+              </label>
+              <div className="flex flex-col items-start">
+                <input
+                  type="text"
+                  name="firstName"
+                  onChange={changeHandler}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div className="ml-4 w-1/2">
+            <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 undefined"
+              >
+                Last Name
+              </label>
+              <div className="flex flex-col items-start">
+                <input
+                  type="text"
+                  name="lastName"
+                  onChange={changeHandler}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+          </div>
+            <div className="mt-4">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 undefined"
+              >
+                Mobile
+              </label>
+              <div className="flex flex-col items-start">
+                <input
+                  type="number"
+                  name="mobile"
+                  onChange={changeHandler}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div className="mt-4">
               <label
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700 undefined"

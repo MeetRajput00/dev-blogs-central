@@ -14,7 +14,6 @@ export const currentPageSlice = createSlice({
   },
 })
 
-// Action creators are generated for each case reducer function
 export const { changeValue } = currentPageSlice.actions
 
 export default currentPageSlice.reducer

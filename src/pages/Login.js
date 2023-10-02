@@ -2,8 +2,11 @@ import { useState } from "react";
 import {  Link } from "react-router-dom";
 import { authenticateUser } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { setFirstName,setLastName,setEmail,setJoiningDate,setMobile } from "../features/currentUser/currentUserSlice";
 
 export default function Login() {
+  const dispatch = useDispatch()
   const navigate=useNavigate();
 
   const [credentials, setCredentials] = useState({
@@ -15,7 +18,12 @@ export default function Login() {
   };
   const onButtonClick = () => {
     authenticateUser(credentials.username,credentials.password).then((authenticated)=>{
-      if(authenticated){
+      if(authenticated!=null){
+        dispatch(setFirstName(authenticated.firstName));
+        dispatch(setLastName(authenticated.lastName));
+        dispatch(setEmail(authenticated.email));
+        dispatch(setMobile(authenticated.mobile));
+        dispatch(setJoiningDate(authenticated.joiningDate));
         navigate("/userfeed");
       }
       else{
