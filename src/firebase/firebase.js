@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getDatabase,ref, set,get,child } from "firebase/database";
 const firebaseConfig = {
   apiKey: process.env.firebase_apiKey,
-  authDomain: "devspace-11ca8.firebaseapp.com",
-  projectId: "devspace-11ca8",
-  storageBucket: "devspace-11ca8.appspot.com",
-  messagingSenderId: "589037692530",
-  appId: "1:589037692530:web:6a3b4ace8025f6e64304eb",
-  measurementId: "G-H4KNY4TQ8Q",
-  databaseURL: "https://devspace-11ca8-default-rtdb.firebaseio.com/"
+  authDomain: process.env.firebase_authDomain,
+  projectId: process.env.firebase_projectId,
+  storageBucket: process.env.firebase_storageBucket,
+  messagingSenderId: process.env.firebase_messagingSenderId,
+  appId: process.env.firebase_appId,
+  measurementId: process.env.firebase_measurementId,
+  databaseURL: process.env.firebase_databaseURL
 };
 
 
