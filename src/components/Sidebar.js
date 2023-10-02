@@ -34,7 +34,7 @@ function Sidebar() {
           <div className="flex items-center space-x-4">
           <svg className="w-10 h-10 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path></svg>
             <div className="font-medium dark:text-white">
-              <div>{console.log(FirstName,LastName,JoiningDate)}{FirstName} {LastName}</div>
+              <div>{FirstName} {LastName}</div>
               <div className="text-sm text-gray-500 dark:text-gray-400">
                 Joined on {JoiningDate.match(/(\d{1,4}([.\-/])\d{1,2}([.\-/])\d{1,4})/g)}
               </div>
