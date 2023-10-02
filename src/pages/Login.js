@@ -3,7 +3,7 @@ import {  Link } from "react-router-dom";
 import { authenticateUser } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
-import { setFirstName,setLastName,setEmail,setJoiningDate,setMobile } from "../features/currentUser/currentUserSlice";
+import { setFirstName,setLastName,setEmail,setJoiningDate,setMobile,setUsername,setUserAuthenticated } from "../features/currentUser/currentUserSlice";
 
 export default function Login() {
   const dispatch = useDispatch()
@@ -24,6 +24,8 @@ export default function Login() {
         dispatch(setEmail(authenticated.email));
         dispatch(setMobile(authenticated.mobile));
         dispatch(setJoiningDate(authenticated.joiningDate));
+        dispatch(setUsername(authenticated.username));
+        dispatch(setUserAuthenticated());
         navigate("/userfeed");
       }
       else{

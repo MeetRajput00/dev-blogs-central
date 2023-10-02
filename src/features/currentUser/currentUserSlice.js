@@ -5,7 +5,9 @@ const initialState={
     lastName: "",
     mobile: "",
     email: "",
-    joiningDate: ""
+    joiningDate: "",
+    username: "",
+    isAuthenticated:0
 }
 
 export const currentUserSlice = createSlice({
@@ -26,10 +28,27 @@ export const currentUserSlice = createSlice({
     },
     setJoiningDate: (state,action)=>{
         state.joiningDate=action.payload
+    },
+    setUsername: (state,action)=>{
+        state.username=action.payload
+    },
+    setLogOutUser: (state)=>{
+        state.firstName="";
+        state.lastName="";
+        state.email="";
+        state.mobile="";
+        state.joiningDate="";
+        state.username=""
+    },
+    setUserAuthenticated:(state)=>{
+        state.isAuthenticated=1
+    },
+    setUserNotAuthenticated:(state)=>{
+        state.isAuthenticated=0
     }
   },
 })
 
-export const { setFirstName, setLastName, setMobile, setEmail, setJoiningDate } = currentUserSlice.actions
+export const { setFirstName, setLastName, setMobile, setEmail, setJoiningDate, setUsername,setLogOutUser,setUserAuthenticated,setUserNotAuthenticated } = currentUserSlice.actions
 
 export default currentUserSlice.reducer

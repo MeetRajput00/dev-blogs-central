@@ -1,7 +1,51 @@
+import { useEffect,useState } from "react";
+import { createUserPost } from "../../firebase/firebase";
+import { useSelector } from "react-redux";
+
 export default function CreateNewBlog() {
+  const [rows, setRows] = useState(10); 
+
+  useEffect(() => {
+    const windowHeight = window.innerHeight;
+    const textareaPadding = 16;
+
+    const calculatedRows = Math.floor((windowHeight - textareaPadding) / 25);
+
+    setRows(Math.max(calculatedRows, 3));
+  }, []);
+  const currentUser=useSelector((state)=>state.currentUser.username);
+  const [postData, setPostData]=useState({
+    Name:"",
+    Post:""
+  });
+  const validateData=()=>{
+    if(postData.Name==="" || postData.Post===""){
+      return false;
+    }
+    return true;
+  }
+  const changeHandler = (e) => {
+    setPostData({...postData,[e.target.name]:e.target.value});
+  };
+
+  const PublishButtonHandler=()=>{
+    if(validateData()){
+      createUserPost(currentUser,postData.Name,postData.Post).then((userCreated)=>{
+      if(userCreated){
+        alert("Post created");
+      }
+      else{
+        alert("Post name already exists");
+      }
+      })
+    }
+    else{
+      alert("Please fill out blog first.")
+    }
+  }
   return (
     <div className="flex flex-col w-10/12 h-full">
-    <input type="text" id="post_name" className="m-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/5 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name of the post" required/>
+    <input onChange={changeHandler} name="Name" type="text" id="post_name" className="m-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/5 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name of the post" required/>
     <div className="m-4">
         <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
           <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
@@ -197,8 +241,10 @@ export default function CreateNewBlog() {
               Publish post
             </label>
             <textarea
+              name="Post"
+              onChange={changeHandler}
               id="editor"
-              rows="40"
+              rows={rows}
               className="block w-full px-0 text-sm text-gray-800 bg-white border-0 focus:outline-none resize-none"
               placeholder="Write an article..."
               required
@@ -208,7 +254,8 @@ export default function CreateNewBlog() {
         <div className="w-full flex flex-row justify-end">
         <button
           type="submit"
-          className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-700 "
+          className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-700"
+          onClick={PublishButtonHandler}
         >
           Publish post
         </button>

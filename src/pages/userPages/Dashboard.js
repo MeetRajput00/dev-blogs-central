@@ -1,14 +1,11 @@
-import { useState,useEffect } from "react";
-import { getDashboardPosts } from "../../firebase/firebase";
 import Article from "../../components/Article";
-import { useSelector } from "react-redux/es/hooks/useSelector";
-
-export default function MyBlogs(){
+import { useEffect,useState } from "react";
+import { getDashboardPosts } from "../../firebase/firebase";
+export default function Dashboard(){
     const [displayPosts, setDisplayPosts] = useState([]);
-    const username=useSelector((state)=>state.currentUser.username);
     const getPosts=async ()=>{
         try {
-            const result = await getDashboardPosts(username);
+            const result = await getDashboardPosts();
             setDisplayPosts(result);
         } catch (error) {
             console.error("Error fetching posts: ", error);

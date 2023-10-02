@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState={
-    Title:"Register"
+    Title:"Dashboard"
 }
 
 export const currentPageSlice = createSlice({
