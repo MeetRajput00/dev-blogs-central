@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { changeValue } from "../features/currentPage/currentPageSlice";
-import ResetGlobalStates from "../features/globalStates/ResetGlobalStates";
+import {ResetGlobalStates} from "../features/globalStates/ResetGlobalStates";
 import { useNavigate } from "react-router-dom";
 export default function HoverButton(props) {
   const navigate=useNavigate();

@@ -1,4 +1,3 @@
-// In your Redux actions file (e.g., actions.js)
 import { useDispatch } from "react-redux";
 import { setLogOutUser, setUserNotAuthenticated } from "../currentUser/currentUserSlice";
 import { changeValue } from "../currentPage/currentPageSlice";
