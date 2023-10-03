@@ -8,13 +8,6 @@ function Sidebar() {
   const LastName=useSelector((state)=>state.currentUser.lastName);
   const JoiningDate=useSelector((state)=>state.currentUser.joiningDate);
 
-  const [item, selectedItem]=useState("Dashboard");
-
-  const clickHandler=(title)=>{
-    selectedItem(title);
-    console.log(title);
-  }
-
   const topBarTitles = [
     "Dashboard",
     "Create New Blog",
