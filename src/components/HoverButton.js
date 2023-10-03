@@ -1,13 +1,14 @@
 import { useDispatch } from "react-redux";
 import { changeValue } from "../features/currentPage/currentPageSlice";
-import GlobalStates from "../GlobalStates";
 import { useNavigate } from "react-router-dom";
+import GlobalStates from "../GlobalStates";
 export default function HoverButton(props) {
   const navigate=useNavigate();
   const dispatch=useDispatch();
+  const [ResetGlobalStates]=GlobalStates();
   const handleClick=()=>{
     if(props.name==="Logout"){
-      <GlobalStates/>
+      ResetGlobalStates();
       navigate("/");
     }
     else{
