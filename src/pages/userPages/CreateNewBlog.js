@@ -1,8 +1,35 @@
 import { useEffect,useState } from "react";
 import { createUserPost } from "../../firebase/firebase";
 import { useSelector } from "react-redux";
-
+import CategoryListItem from "../../components/CategoryListItem";
 export default function CreateNewBlog() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("Programming");
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    setIsDropdownOpen(false);
+    console.log(category);
+  };
+  const categories = [
+    "Web Dev",
+    "Android",
+    "AI/ML",
+    "Data Science",
+    "Cybersecurity",
+    "Game Dev",
+    "Tech Reviews",
+    "Tech News",
+    "Cloud",
+    "Hardware",
+    "Software",
+    "Networking",
+    "Tech Startups"
+  ];
+  
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
   const [rows, setRows] = useState(10); 
 
   useEffect(() => {
@@ -30,7 +57,7 @@ export default function CreateNewBlog() {
 
   const PublishButtonHandler=()=>{
     if(validateData()){
-      createUserPost(currentUser,postData.Name,postData.Post).then((userCreated)=>{
+      createUserPost(currentUser,postData.Name,postData.Post,selectedCategory).then((userCreated)=>{
       if(userCreated){
         alert("Post created");
       }
@@ -45,7 +72,28 @@ export default function CreateNewBlog() {
   }
   return (
     <div className="flex flex-col w-10/12 h-full">
-    <input onChange={changeHandler} name="Name" type="text" id="post_name" className="m-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/5 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name of the post" required/>
+      <div className="flex flex-row w-full">
+      <input onChange={changeHandler} name="Name" type="text" id="post_name" className="m-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-2/5 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name of the post" required/>
+      <div className="m-4">
+        <div className="dropdown inline-block relative">
+          <button className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center" onClick={toggleDropdown}>
+            <span className="mr-1">{selectedCategory}</span>
+            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
+          </button>
+          <ul className={`dropdown-menu absolute text-gray-700 pt-1 ${isDropdownOpen ? '' : 'hidden'}`}>
+            <li className=""><a className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap hover:cursor-pointer" onClick={() => handleCategoryClick("Programming")}>Programming</a></li>
+            {categories.map((category, index) => (
+              <li className="">
+              <a className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap hover:cursor-pointer" onClick={() => handleCategoryClick(category)}>
+                {category}
+              </a>
+            </li>
+            ))}
+            <li className=""><a className="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap hover:cursor-pointer" onClick={() => handleCategoryClick("Open Source")}>Open Source</a></li>
+          </ul>
+        </div>
+      </div>        
+      </div>
     <div className="m-4">
         <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
           <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">

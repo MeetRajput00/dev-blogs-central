@@ -50,7 +50,7 @@ export default async function writeUserData(firstName, lastName, mobile, usernam
     }
     return result;
   }
-export async function createUserPost(username, postname, post){
+export async function createUserPost(username, postname, post, selectedCategory){
   const snapshot=await get(child(ref(database),"posts/"+postname));
   if (snapshot.exists()) {
       return false;
@@ -58,7 +58,8 @@ export async function createUserPost(username, postname, post){
   else{
     await set(ref(database, 'posts/' + postname), {
       username: username,
-      data: post
+      data: post,
+      selectedCategory: selectedCategory
     });
     return true;
   }
