@@ -1,70 +1,77 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Dev Blogs Central
 
-## Available Scripts
+Dev Blogs Central is a reactjs project built for educational purposes. It uses firebase as backend and redux-toolkit as a state handler.
 
-In the project directory, you can run:
 
-### `npm start`
+## Setup and Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Clone the project using git clone command
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+  git clone https://github.com/MeetRajput00/dev-blogs-central.git
+```
 
-### `npm test`
+Install the project with npm
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+  cd dev-blogs-central
+  npm i
+```
 
-### `npm run build`
+## Deployment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To deploy this project run
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+  npm run deploy
+```
+## Build
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To build this project run
 
-### `npm run eject`
+```bash
+  npm run build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Also, setup your .env file for firebase variables
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Badges
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+[MIT](https://choosealicense.com/licenses/mit/)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Tech Stack
 
-### Making a Progressive Web App
+**Client:** React, Redux, TailwindCSS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**Server:** Node, Express
 
-### Advanced Configuration
+**Backend:** Firebase
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Contributing
 
-### `npm run build` fails to minify
+Contributions are always welcome!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Please adhere to this project's `code of conduct`.
+
+    
+## Authors
+
+- [@MeetRajput00](https://www.github.com/MeetRajput00)
+
+## Support
+
+For support, email rajputmeet10@gmail.com
+
+
