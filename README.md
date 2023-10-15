@@ -49,16 +49,6 @@ Also, setup your .env file for firebase variables
 [MIT](https://choosealicense.com/licenses/mit/)
 
 
-## Tech Stack
-
-**Client:** React, Redux, TailwindCSS
-
-**Server:** Node, Express
-
-**Backend:** Firebase
-
-
-
 ## Contributing
 
 Contributions are always welcome!
