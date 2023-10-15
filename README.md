@@ -1,7 +1,7 @@
 
 # Dev Blogs Central
 
-Dev Blogs Central is a reactjs project built for educational purposes. It uses firebase as backend and redux-toolkit as a state handler.
+Dev Blogs Central is a social media platform for developers to share updates on their projects. It allows developers to showcase their project status, enabling their followers to keep track of their work and progress. 
 
 
 ## Setup and Installation
@@ -16,7 +16,7 @@ Install the project with npm
 
 ```bash
   cd dev-blogs-central
-  npm i
+  npm install
 ```
 
 To deploy this project run
