@@ -32,18 +32,17 @@ To build this project run
 ```
 Also, setup your .env file for firebase variables
 
-## Badges
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
-
 ## Contributing
 
 Contributions are always welcome!
 
 Please adhere to this project's `code of conduct`.
 
+## Badges
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
     
 ## Authors
 
