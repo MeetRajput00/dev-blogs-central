@@ -19,35 +19,24 @@ Install the project with npm
   npm i
 ```
 
-## Deployment
-
 To deploy this project run
 
 ```bash
   npm run deploy
 ```
-## Build
 
 To build this project run
 
 ```bash
   npm run build
 ```
-
 Also, setup your .env file for firebase variables
 
-
 ## Badges
-
-
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-
-
 ## License
-
 [MIT](https://choosealicense.com/licenses/mit/)
-
 
 ## Contributing
 
