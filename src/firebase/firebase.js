@@ -25,29 +25,48 @@ export default async function writeUserData(firstName, lastName, mobile, usernam
       joiningDate: new Date().toLocaleString()
     });
   }
-  export async function getDashboardPosts(username=""){
+  export async function getDashboardPosts(username="",category=""){
     const snapshot = await get(child(ref(database), "posts"));
     const result = [];
-    if(username!==""){
+    if(category!==""){
+      console.log(category);
       snapshot.forEach((data) => {
-          if(username!=="" && data.val().username===username){
+          if(data.val().category===category){
             result.push({
               postname: data.key,
               post: data.val().data,
+              category: data.val().category,
               username: data.val().username,
+              createdOn: data.val().createdOn
+            });
+          }
+      });
+    }
+    else if(username!==""){
+      snapshot.forEach((data) => {
+          if(data.val().username===username){
+            result.push({
+              postname: data.key,
+              post: data.val().data,
+              category: data.val().category,
+              username: data.val().username,
+              createdOn: data.val().createdOn
             });
           }
       });
     }
     else{
-      snapshot.forEach((data) => {
+      snapshot.forEach((data) => {       
           result.push({
-              postname: data.key,
-              post: data.val().data,
-              username: data.val().username,
-          });
+            postname: data.key,
+            post: data.val().data,
+            category: data.val().category,
+            username: data.val().username,
+            createdOn: data.val().createdOn
+        });
       });
     }
+    result.sort((a, b) => b.createdOn-a.createdOn);
     return result;
   }
 export async function createUserPost(username, postname, post, selectedCategory){
@@ -59,7 +78,8 @@ export async function createUserPost(username, postname, post, selectedCategory)
     await set(ref(database, 'posts/' + postname), {
       username: username,
       data: post,
-      selectedCategory: selectedCategory
+      category: selectedCategory,
+      createdOn: new Date().toLocaleString()
     });
     return true;
   }

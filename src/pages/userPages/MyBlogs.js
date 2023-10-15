@@ -21,7 +21,7 @@ export default function MyBlogs(){
         <div className="flex flex-col w-10/12 h-full overflow-auto" >
             {displayPosts.map((value) => (
                 <div key={value.postname}>
-                    <Article postname={value.postname} post={value.post} username={value.username} />
+                    <Article postname={value.postname} post={value.post} username={value.username} category={value.category}/>
                 </div>
             ))}
         </div>
