@@ -114,7 +114,7 @@ export async function checkUserExists_Google(email){
     return false;
 }
 export async function writeUserData_Google(firstName, lastName, mobile, username, email, password) {
-  await set(ref(database, 'users/' + email), {
+  await set(ref(database, 'usersGoogle/' + email), {
     firstName: firstName,
     lastName: lastName,
     mobile: mobile,
