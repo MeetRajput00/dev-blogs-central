@@ -14,7 +14,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const database = getDatabase(app);
-
+export function generateString(length) {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  checkUserExists(result).then((ifExists)=>{
+    if(ifExists){
+      generateString(length);
+    }
+  })
+  return result;
+}
 export default async function writeUserData(firstName, lastName, mobile, username, email, password) {
     await set(ref(database, 'users/' + username), {
       firstName: firstName,
@@ -90,6 +105,23 @@ export async function checkUserExists(username){
       return true;
     }
     return false;
+}
+export async function checkUserExists_Google(email){
+  const snapshot=await get(child(ref(database),"users/"+email));
+    if(snapshot.exists()){
+      return true;
+    }
+    return false;
+}
+export async function writeUserData_Google(firstName, lastName, mobile, username, email, password) {
+  await set(ref(database, 'users/' + email), {
+    firstName: firstName,
+    lastName: lastName,
+    mobile: mobile,
+    username: username,
+    password : password,
+    joiningDate: new Date().toLocaleString()
+  });
 }
 export async function authenticateUser(username, password){
   const snapshot=await get(child(ref(database),"users/"+username));

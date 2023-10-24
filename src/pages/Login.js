@@ -1,12 +1,12 @@
 import { useState } from "react";
 import {  Link } from "react-router-dom";
-import { authenticateUser } from "../firebase/firebase";
+import generateString, { authenticateUser } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { setFirstName,setLastName,setEmail,setJoiningDate,setMobile,setUsername,setUserAuthenticated } from "../features/currentUser/currentUserSlice";
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
-import writeUserData, { checkUserExists } from "../firebase/firebase";
+import { checkUserExists_Google, writeUserData_Google } from "../firebase/firebase";
 
 export default function Login() {
   const dispatch = useDispatch()
@@ -20,18 +20,18 @@ export default function Login() {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
   const loginByGoogle=(token)=>{
-    checkUserExists(token.name).then((userExists)=>{
-      if(!userExists){            
-        writeUserData(
-          token.given_name,
-          token.family_name,
-          "",
-          token.name,
-          token.email,
-          ""
-        );
-      }
-    });
+    checkUserExists_Google(token.email).then((userExists)=>{
+        if(!userExists){            
+          writeUserData_Google(
+            token.given_name,
+            token.family_name,
+            "",
+            generateString(8),
+            token.email,
+            generateString(10)
+          );
+        }
+      });
     dispatch(setFirstName(token.given_name));
     dispatch(setLastName(token.family_name));
     dispatch(setEmail(token.email));
