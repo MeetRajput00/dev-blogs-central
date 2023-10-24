@@ -8,7 +8,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 import writeUserData, { checkUserExists } from "../firebase/firebase";
 
-export default function Login() {
+export default function LoginComponent() {
   const dispatch = useDispatch()
   const navigate=useNavigate();
 
@@ -19,28 +19,6 @@ export default function Login() {
   const changeHandler = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
-  const loginByGoogle=(token)=>{
-    checkUserExists(token.name).then((userExists)=>{
-      if(!userExists){            
-        writeUserData(
-          token.given_name,
-          token.family_name,
-          "",
-          token.name,
-          token.email,
-          ""
-        );
-      }
-    });
-    dispatch(setFirstName(token.given_name));
-    dispatch(setLastName(token.family_name));
-    dispatch(setEmail(token.email));
-    dispatch(setMobile(token.mobile));
-    dispatch(setJoiningDate(new Date().toLocaleString()));
-    dispatch(setUsername(token.name));
-    dispatch(setUserAuthenticated());
-    navigate("/userfeed");
-  }
   const onButtonClick = () => {
     authenticateUser(credentials.username,credentials.password).then((authenticated)=>{
       if(authenticated!=null){
@@ -58,10 +36,32 @@ export default function Login() {
       }
     })
   };
+  const loginByGoogle=(token)=>{
+    checkUserExists(token.name).then((userExists)=>{
+        if(!userExists){            
+          writeUserData(
+            token.given_name,
+            token.family_name,
+            "",
+            token.name,
+            token.email,
+            ""
+          );
+        }
+      });
+    dispatch(setFirstName(token.given_name));
+    dispatch(setLastName(token.family_name));
+    dispatch(setEmail(token.email));
+    dispatch(setMobile(token.mobile));
+    dispatch(setJoiningDate(new Date().toLocaleString()));
+    dispatch(setUsername(token.name));
+    dispatch(setUserAuthenticated());
+    navigate("/userfeed");
+  }
   return (
-    <div className="flex items-center justify-center flex-col min-h-screen min-w-fit bg-white">
-      <div className="flex flex-col h-fit w-1/4 bg-white items-center rounded-md shadow-md">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+    <div className="flex items-center justify-center flex-col w-1/4 bg-white">
+      <div className="flex flex-col h-fit w-full bg-white items-center rounded-md shadow-md">
+        <div>
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
           </h2>
