@@ -2,14 +2,14 @@ import { initializeApp } from "firebase/app";
 import { getDatabase,ref, set,get,child } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
-  appId: process.env.REACT_APP_FIREBASE_APPID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENTID,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASEURL,
+apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
+appId: process.env.REACT_APP_FIREBASE_APPID,
+measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENTID,
+databaseURL: process.env.REACT_APP_FIREBASE_DATABASEURL,
 };
 const app = initializeApp(firebaseConfig);
 
@@ -106,18 +106,19 @@ export async function checkUserExists(username){
     }
     return false;
 }
-export async function checkUserExists_Google(email){
-  const snapshot=await get(child(ref(database),"users/"+email));
-    if(snapshot.exists()){
-      return true;
-    }
-    return false;
-}
+// export async function checkUserExists_Google(email){
+//   const snapshot=await get(child(ref(database),"usersGoogle/"+email));
+//     if(snapshot.exists()){
+//       return true;
+//     }
+//     return false;
+// }
 export async function writeUserData_Google(firstName, lastName, mobile, username, email, password) {
-  await set(ref(database, 'usersGoogle/' + email), {
+  await set(ref(database, 'usersGoogle/' + generateString(10)), {
     firstName: firstName,
     lastName: lastName,
     mobile: mobile,
+    email: email,
     username: username,
     password : password,
     joiningDate: new Date().toLocaleString()

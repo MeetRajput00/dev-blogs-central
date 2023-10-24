@@ -1,16 +1,26 @@
 import { useState } from "react";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import generateString, { authenticateUser } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux'
-import { setFirstName,setLastName,setEmail,setJoiningDate,setMobile,setUsername,setUserAuthenticated } from "../features/currentUser/currentUserSlice";
-import { GoogleLogin } from '@react-oauth/google';
+import { useDispatch } from "react-redux";
+import {
+  setFirstName,
+  setLastName,
+  setEmail,
+  setJoiningDate,
+  setMobile,
+  setUsername,
+  setUserAuthenticated,
+} from "../features/currentUser/currentUserSlice";
+import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
-import { checkUserExists_Google, writeUserData_Google } from "../firebase/firebase";
+import {
+  writeUserData_Google,
+} from "../firebase/firebase";
 
 export default function Login() {
-  const dispatch = useDispatch()
-  const navigate=useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({
     username: "",
@@ -19,19 +29,15 @@ export default function Login() {
   const changeHandler = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
-  const loginByGoogle=(token)=>{
-    checkUserExists_Google(token.email).then((userExists)=>{
-        if(!userExists){            
-          writeUserData_Google(
-            token.given_name,
-            token.family_name,
-            "",
-            generateString(8),
-            token.email,
-            generateString(10)
-          );
-        }
-      });
+  const loginByGoogle = (token) => {
+    writeUserData_Google(
+      token.given_name,
+      token.family_name,
+      "",
+      generateString(8),
+      token.email,
+      generateString(10)
+    );
     dispatch(setFirstName(token.given_name));
     dispatch(setLastName(token.family_name));
     dispatch(setEmail(token.email));
@@ -40,23 +46,24 @@ export default function Login() {
     dispatch(setUsername(token.name));
     dispatch(setUserAuthenticated());
     navigate("/userfeed");
-  }
+  };
   const onButtonClick = () => {
-    authenticateUser(credentials.username,credentials.password).then((authenticated)=>{
-      if(authenticated!=null){
-        dispatch(setFirstName(authenticated.firstName));
-        dispatch(setLastName(authenticated.lastName));
-        dispatch(setEmail(authenticated.email));
-        dispatch(setMobile(authenticated.mobile));
-        dispatch(setJoiningDate(authenticated.joiningDate));
-        dispatch(setUsername(authenticated.username));
-        dispatch(setUserAuthenticated());
-        navigate("/userfeed");
+    authenticateUser(credentials.username, credentials.password).then(
+      (authenticated) => {
+        if (authenticated != null) {
+          dispatch(setFirstName(authenticated.firstName));
+          dispatch(setLastName(authenticated.lastName));
+          dispatch(setEmail(authenticated.email));
+          dispatch(setMobile(authenticated.mobile));
+          dispatch(setJoiningDate(authenticated.joiningDate));
+          dispatch(setUsername(authenticated.username));
+          dispatch(setUserAuthenticated());
+          navigate("/userfeed");
+        } else {
+          alert("User or password is incorrect.");
+        }
       }
-      else{
-        alert("User or password is incorrect.")
-      }
-    })
+    );
   };
   return (
     <div className="flex items-center justify-center flex-col min-h-screen min-w-fit bg-white">
@@ -119,33 +126,29 @@ export default function Login() {
           </div>
           <div className="flex flex-col items-center mt-6 justify-end">
             <div className="flex flex-row items-center justify-end">
-              
-          <p className="text-center text-sm text-gray-500">
-            Not a member?
-          </p>
-          <div className="font-semibold leading-6 text-orange-600 hover:text-orange-500">
-            <Link to="/register">Register now</Link>
-          </div>
+              <p className="text-center text-sm text-gray-500">Not a member?</p>
+              <div className="font-semibold leading-6 text-orange-600 hover:text-orange-500">
+                <Link to="/register">Register now</Link>
+              </div>
             </div>
-          
-          <div className="flex items-center w-full my-4">
-            <hr className="w-full" />
-            <p className="px-3 ">OR</p>
-            <hr className="w-full" />
-          </div>
-          <div className="my-3 space-y-2 flex justify-center w-full">
-            <GoogleLogin
-              aria-label="Login with Google"
-              width="350"
-              onSuccess={credentialResponse=>{
-                loginByGoogle(jwt_decode(credentialResponse.credential));
-              }}
-              onError={() => {
-                console.log('Login Failed');
-              }}
-            >
-            </GoogleLogin>
-          </div>
+
+            <div className="flex items-center w-full my-4">
+              <hr className="w-full" />
+              <p className="px-3 ">OR</p>
+              <hr className="w-full" />
+            </div>
+            <div className="my-3 space-y-2 flex justify-center w-full">
+              <GoogleLogin
+                aria-label="Login with Google"
+                width="350"
+                onSuccess={(credentialResponse) => {
+                  loginByGoogle(jwt_decode(credentialResponse.credential));
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              ></GoogleLogin>
+            </div>
           </div>
         </div>
       </div>
